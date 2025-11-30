@@ -87,16 +87,16 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " fzf bindings
 map <leader>f :Files<cr>
-map <leader><leader> :Files<cr>
+map <leader><leader> :GFiles<cr>
 map <leader>g :Rg<cr>
-" map <leader>b :Buffers<cr>
+map <leader>b :Buffers<cr>
 " lsp bindings
 map gd :ALEGoToDefinition<cr>
 map gr :ALEFindReferences<cr>
 map K :ALEHover<cr>
 map <leader>ca :ALECodeAction<cr>
 map <leader>cr :ALERename<cr>
-map <leader>fr :ALEFileRename<cr>
+map <leader>cfr :ALEFileRename<cr>
 
 " create swap directory if it doesn't exists
 silent exec '!mkdir -p $HOME/.cache/vim'
