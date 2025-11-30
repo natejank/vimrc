@@ -1,5 +1,4 @@
 " auto-install vim-plug
-"
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -7,7 +6,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 " plugins
-"
 call plug#begin()
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
@@ -18,73 +16,51 @@ Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 call plug#end()
 
-" Editor settings
-"
-" Use line numbers
-set number
-" Enable syntax highlighting
-filetype plugin indent on
-" tabs display as 4 spaces
-set tabstop=4
-" use 4 spaces per indent
-set shiftwidth=4
-" use spaces instead of tabs
-set expandtab
-" autodetect indent size
-set smartindent
-" delete indentation on backspace
-set backspace=indent,eol,start
-" get more intelligent tab and delete behavior
-set smarttab
-" get tab-completion for : menu
-set wildmenu
-" enable the mouse
-set mouse=a
-set ttymouse=sgr
-" configure splits
-set splitright
-set splitbelow
-" configure scrolling
-set scrolloff=1
-set sidescrolloff=5
-" allow more than one buffer to remain in memory
-set hidden
-" don't read modeline from files
-" set nomodeline
-" ignore case when searching
-set ignorecase
-" make search optionally case-aware
-set smartcase
-" show results when searching
-set incsearch
-" show all results when searching
-set hlsearch
-" reload the file when modified
-set autoread
-" disable line wrap
-set nowrap
-" maintain vertical position when changing lines
-set nostartofline
-" show incomplete keyboard chords
-set showcmd
-" no timeout on keyboard chords
-set notimeout
-" disable delay after <esc>
-set ttimeout
-set ttimeoutlen=0
-" configure vertical column
-set colorcolumn=80,120
+" settings
+set number                             " use line numbers
+filetype plugin indent on              " use per-filetype settings
+syntax on                              " enable syntax highlighting
+set tabstop=4                          " tabs display as 4 spaces
+set shiftwidth=4                       " number of spaces to use for indent
+set expandtab                          " use spaces instead of tabs
+set smartindent                        " use smart indenting on new line
+set backspace=indent,eol,start         " delete indentation
+set smarttab                           " better tab and delete
+set wildmenu                           " get a menu for tab-completing stuff
+set mouse=a                            " mouse support in (a)ll modes
+set ttymouse=sgr                       " the mouse which works over ssh
+set splitright                         " vertical splits open on the right
+set splitbelow                         " horizontal splits open below
+set scrolloff=1                        " always leave 1 line below the cursor
+set sidescrolloff=5                    " always leave 5 chrs right of cursor
+set hidden                             " open more than 1 buffer simultaneously
+set nomodeline                         " don't read arbitrary config from buffers
+set ignorecase                         " ignore case by default
+set smartcase                          " case-aware autocomplete
+set incsearch                          " show match while searching/substituting
+set hlsearch                           " show all results of a search
+set autoread                           " detect when a file is modified
+set nowrap                             " I hate line wrap!!
+set nostartofline                      " maintain cursor position for move cmds
+set showcmd                            " show partial chords as you enter them
+set notimeout                          " don't timeout waiting for a chord
+set ttimeout                           " configure a timeout for key codes
+set ttimeoutlen=0                      " do not wait after input for a chord
+                                       " this removes the delay after <esc>
+set colorcolumn=80,120                 " column at 80, 120 chrs
 
+colorscheme jellybeans
 " keybindings - actions are on <space>
 map <space> <nop>
 let mapleader=" "
 " clear search highlight
 nnoremap <leader>n :nohl<cr>
 map gcc :Commentary<cr>
-vnoremap gc :Commentary<cr>
+vmap gc :Commentary<cr>
 " move faster with less finger movement
 nnoremap gl $
 nnoremap gh 0
