@@ -16,8 +16,14 @@ Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
+Plug 'https://github.com/nanotech/jellybeans.vim'
+colorscheme jellybeans
+
+Plug 'https://github.com/dense-analysis/ale'
+let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
+" let g:ale_fix_on_save = 1
+
 call plug#end()
 
 " settings
@@ -53,7 +59,6 @@ set ttimeoutlen=0                      " do not wait after input for a chord
                                        " this removes the delay after <esc>
 set colorcolumn=80,120                 " column at 80, 120 chrs
 
-colorscheme jellybeans
 " keybindings - actions are on <space>
 map <space> <nop>
 let mapleader=" "
@@ -72,8 +77,16 @@ vnoremap gh 0
 vnoremap gb ^
 " fzf bindings
 map <leader>f :Files<cr>
+map <leader><leader> :Files<cr>
 map <leader>g :Rg<cr>
 " map <leader>b :Buffers<cr>
+" lsp bindings
+map gd :ALEGoToDefinition<cr>
+map gr :ALEFindReferences<cr>
+map K :ALEHover<cr>
+map <leader>ca :ALECodeAction<cr>
+map <leader>cr :ALERename<cr>
+map <leader>fr :ALEFileRename<cr>
 
 set listchars=tab:>\ ,trail:-,nbsp:+,space:.
 " augroup ShowTrailing
