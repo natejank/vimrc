@@ -25,7 +25,7 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%: %severity%] %s'
 let g:ale_set_highlights = 1
 let g:ale_set_signs = 1
-let g:ale_hover_cursor = 0
+let g:ale_floating_preview = 1
 " let g:ale_fix_on_save = 1
 
 " colorscheme!
@@ -65,6 +65,7 @@ set ttimeoutlen=0                      " do not wait after input for a chord
 set colorcolumn=80,120                 " column at 80, 120 chrs
 set signcolumn=yes                     " enable the gutter left of the numbers
 set updatetime=100                     " lower delay of disk sync operations
+set previewpopup=height:10,width:60    " display preview windows as popups
 
 " keybindings - actions are on <space>
 map <space> <nop>
