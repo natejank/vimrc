@@ -18,13 +18,24 @@ Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/nanotech/jellybeans.vim'
-colorscheme jellybeans
-
 Plug 'https://github.com/dense-analysis/ale'
+call plug#end()
+
+" ale settings
+let g:ale_enabled = 1
+let g:ale_completion_enabled=1
 let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
+let g:ale_sign_column_always = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%: %severity%] %s'
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
+let g:ale_hover_cursor = 0
 " let g:ale_fix_on_save = 1
 
-call plug#end()
+" colorscheme!
+colorscheme jellybeans
 
 " settings
 set number                             " use line numbers
@@ -58,6 +69,7 @@ set ttimeout                           " configure a timeout for key codes
 set ttimeoutlen=0                      " do not wait after input for a chord
                                        " this removes the delay after <esc>
 set colorcolumn=80,120                 " column at 80, 120 chrs
+set signcolumn=yes                     " enable the gutter left of the numbers
 
 " keybindings - actions are on <space>
 map <space> <nop>
@@ -88,13 +100,6 @@ map <leader>ca :ALECodeAction<cr>
 map <leader>cr :ALERename<cr>
 map <leader>fr :ALEFileRename<cr>
 
-set listchars=tab:>\ ,trail:-,nbsp:+,space:.
-" augroup ShowTrailing
-"     autocmd!
-"     autocmd BufRead,InsertEnter * set nolist
-"     autocmd BufRead,InsertLeave * set list
-" augroup end
-
 " create swap directory if it doesn't exists
 silent exec '!mkdir -p $HOME/.cache/vim'
 set directory=$HOME/.cache/vim//       " store swap files at ~/.cache/vim
@@ -113,11 +118,28 @@ function! Encoding() abort
     return (&fileencoding ? &fileencoding : &encoding)
 endfunction
 
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+set statusline=%{LinterStatus()}
+
 set laststatus=2                       " enable the statusline
 set statusline=                        " clear the statusline
 set statusline+=\                      " start padding
 set statusline+=%F                     " whole path to filename
 set statusline+=%m                     " modified
+set statusline+=\                      " padding before linting
+set statusline+=%{LinterStatus()}      " ALE status
 set statusline+=%=                     " left/right separation
 set statusline+=%{Indent()}            " Indentation
 set statusline+=\ %y                   " filetype
