@@ -19,6 +19,7 @@ Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/dense-analysis/ale'
+Plug 'https://github.com/airblade/vim-gitgutter'
 call plug#end()
 
 " ale settings
@@ -70,6 +71,7 @@ set ttimeoutlen=0                      " do not wait after input for a chord
                                        " this removes the delay after <esc>
 set colorcolumn=80,120                 " column at 80, 120 chrs
 set signcolumn=yes                     " enable the gutter left of the numbers
+set updatetime=100                     " lower delay of disk sync operations
 
 " keybindings - actions are on <space>
 map <space> <nop>
