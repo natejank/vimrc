@@ -12,12 +12,13 @@ Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/dense-analysis/ale'
+Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
 Plug 'https://github.com/airblade/vim-gitgutter'
 call plug#end()
 
 " ale settings
 let g:ale_enabled = 1
-let g:ale_completion_enabled=1
+let g:ale_completion_enabled=0
 let g:ale_fixers = {'*': ['trim_whitespace', 'remove_trailing_lines']}
 let g:ale_sign_column_always = 1
 let g:ale_echo_msg_error_str = 'E'
@@ -25,7 +26,20 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%: %severity%] %s'
 let g:ale_set_highlights = 1
 let g:ale_set_signs = 1
+let g:ale_completion_max_suggestions = 500
+let g:ale_lint_delay = 40
 " let g:ale_fix_on_save = 1
+
+" asyncomplete
+au User asyncomplete_setup call asyncomplete#register_source(
+\   asyncomplete#sources#ale#get_source_options({
+\       'priority': 10,
+\   })
+\)
+" show preview for imports/includes
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect,preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " colorscheme!
 colorscheme jellybeans
@@ -94,9 +108,14 @@ map <leader>b :Buffers<cr>
 map gd :ALEGoToDefinition<cr>
 map gr :ALEFindReferences<cr>
 map K :ALEHover<cr>
+map <C-i> :pclose<cr>
 map <leader>ca :ALECodeAction<cr>
 map <leader>cr :ALERename<cr>
 map <leader>cfr :ALEFileRename<cr>
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
 " create swap directory if it doesn't exists
 silent exec '!mkdir -p $HOME/.cache/vim'
@@ -128,8 +147,6 @@ function! LinterStatus() abort
     \   all_errors
     \)
 endfunction
-
-set statusline=%{LinterStatus()}
 
 set laststatus=2                       " enable the statusline
 set statusline=                        " clear the statusline
