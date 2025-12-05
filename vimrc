@@ -24,10 +24,9 @@ let g:ale_sign_column_always = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%: %severity%] %s'
-let g:ale_set_highlights = 1
+let g:ale_set_highlights = 0  " skip highlights for performance in large files
 let g:ale_set_signs = 1
 let g:ale_completion_max_suggestions = 500
-let g:ale_lint_delay = 40
 " let g:ale_fix_on_save = 1
 
 " asyncomplete
@@ -40,6 +39,10 @@ au User asyncomplete_setup call asyncomplete#register_source(
 let g:asyncomplete_auto_completeopt = 0
 set completeopt=menuone,noinsert,noselect,preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" fzf
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = []  " the preview window doesn't work on windows
 
 " colorscheme!
 colorscheme jellybeans
@@ -100,9 +103,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " fzf bindings
-map <leader>f :Files<cr>
-map <leader><leader> :GFiles<cr>
-map <leader>g :Rg<cr>
+map <leader>f :GFiles<cr>
+map <leader><leader> :Files<cr>
+map <leader>g :RG<cr>
 map <leader>b :Buffers<cr>
 " lsp bindings
 map gd :ALEGoToDefinition<cr>
