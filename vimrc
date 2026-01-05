@@ -1,5 +1,5 @@
 " plugins
-call plug#begin()
+call plug#begin('~/.local/share/plugged')
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-repeat'
