@@ -1,5 +1,5 @@
 " plugins
-call plug#begin('~/.local/share/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-repeat'
@@ -14,7 +14,6 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
 Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 " ale settings
