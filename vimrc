@@ -14,6 +14,7 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
 Plug 'https://github.com/airblade/vim-gitgutter'
+Plug 'https://github.com/benknoble/vim-racket'
 call plug#end()
 
 " ale settings
