@@ -87,7 +87,15 @@ set ttimeoutlen=0                      " do not wait after input for a chord
                                        " this removes the delay after <esc>
 set colorcolumn=80,120                 " column at 80, 120 chrs
 set signcolumn=yes                     " enable the gutter left of the numbers
+set undofile                           " save edits to a file
+set undolevels=10000                   " number of times you can undo
+set undoreload=100000                  " number of undos saved to the file
+set undodir=$HOME/.cache/vim/undo/     " store undo files at ~/.cache/vim/undo
+set directory=$HOME/.cache/vim/        " store swap files at ~/.cache/vim
 set updatetime=100                     " lower delay of disk sync operations
+
+" create cache directory if it doesn't exists
+silent exec '!mkdir -p $HOME/.cache/vim/undo'
 
 " keybindings - actions are on <space>
 map <space> <nop>
@@ -110,14 +118,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " fzf bindings
-if has('win32')
-    " git grep is really slow on windows
-    map <leader>f :GFiles<cr>
-    map <leader><leader> :Files<cr>
-else
-    map <leader>f :Files<cr>
-    map <leader><leader> :GFiles<cr>
-endif
+map <leader><leader> :call fzf#run(fzf#wrap({'source': 'fd --type f --strip-cwd-prefix'}))<cr>
+map <leader>f :GFiles<cr>
 map <leader>g :RG<cr>
 map <leader>b :Buffers<cr>
 " lsp bindings
@@ -132,10 +134,6 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-" create swap directory if it doesn't exists
-silent exec '!mkdir -p $HOME/.cache/vim'
-set directory=$HOME/.cache/vim//       " store swap files at ~/.cache/vim
 
 " a little statusline I borrowed from the internet
 " https://shapeshed.com/vim-statuslines/
