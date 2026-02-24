@@ -5,7 +5,6 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
