@@ -92,6 +92,7 @@ set undoreload=100000                  " number of undos saved to the file
 set undodir=$HOME/.cache/vim/undo/     " store undo files at ~/.cache/vim/undo
 set directory=$HOME/.cache/vim/        " store swap files at ~/.cache/vim
 set updatetime=100                     " lower delay of disk sync operations
+set encoding=utf-8                     " Use UTF-8 file encoding
 
 " create cache directory if it doesn't exists
 silent exec '!mkdir -p $HOME/.cache/vim/undo'
