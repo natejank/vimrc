@@ -94,6 +94,12 @@ set directory=$HOME/.cache/vim/        " store swap files at ~/.cache/vim
 set updatetime=100                     " lower delay of disk sync operations
 set encoding=utf-8                     " Use UTF-8 file encoding
 
+" Ensure the file we are using is not out of sync with the disk
+augroup reload-file
+    autocmd!
+    autocmd CursorHold * silent! checktime
+augroup END
+
 " create cache directory if it doesn't exists
 silent exec '!mkdir -p $HOME/.cache/vim/undo'
 
