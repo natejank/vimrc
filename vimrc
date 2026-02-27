@@ -13,7 +13,7 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
 Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/embear/vim-localvimrc'
+Plug 'https://github.com/natejank/vim-localvimrc'
 call plug#end()
 
 " ale settings
@@ -49,6 +49,9 @@ if has('win32')
     " i can't get the preview window to work on windows
     let g:fzf_vim.preview_window = []
 endif
+
+" localvimrc
+let g:localvimrc_disable_ft = "gitcommit"
 
 " colorscheme!
 colorscheme jellybeans
